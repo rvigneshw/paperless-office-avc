@@ -1,4 +1,12 @@
-
+<?php
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+if(!isset($_SESSION['user'])){
+    header('Location: error.php');
+}
+?>
 <?php 
  if(!isset($_SESSION)) 
     { 
@@ -86,7 +94,7 @@ include_once('db_connection.php');
                         <li class="nav-item" role="presentation">
                         <a 
                         href="add_paper_form.php">
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary rounded-0">
                         Add a Paper
                         </button>
                         </a>
@@ -99,17 +107,14 @@ include_once('db_connection.php');
                     <li class="nav-item" role="presentation">
                             <a 
                             href="dashboard.php">
-                            <button class="btn btn-info">
+                            <button class="btn btn-info rounded-0">
                             Go To Dashboard
                             </button>
                             </a>
                     </li>
-                        <!-- <li class="nav-item" role="presentation"><a class="nav-link" href="#">Second Item
-
-                        </a> -->                    
                     </ul><span class="navbar-text actions"> 
                         <b class="text-white"><?php echo ucwords($_SESSION['user']); ?></b>
-                      <a class="btn btn-warning text-dark " role="button" href="login_manager.php?logout=1">Log Out
+                      <a class="btn btn-warning text-dark rounded-0" role="button" href="login_manager.php?logout=1">Log Out
                       </a>
                 </span>
                 </div>
@@ -124,8 +129,8 @@ include_once('db_connection.php');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js">
     </script>
     <div>
-            <div class="row">                
-<form action="advanced_filter.php" class="form-inline" method="get" style="margin: 0 auto;
+            <div class="row bg-dark">                
+<form action="advanced_filter.php" class="form-inline bg-dark" method="get" style="margin: 0 auto;
     width:80%;">
 
 <select class="form-control col-md-4" name="priority">
@@ -137,9 +142,9 @@ include_once('db_connection.php');
 
 <select class="form-control col-md-4" name="isApproved">
     <option value="-1"  selected>Paper Approval Status--Anything</option>
-    <option value="1">Proposed Paper</option>
-    <option value="2">Expenditure Paper</option>
-    <option value="3">Archived Paper</option>
+    <option value="0">Proposed Paper</option>
+    <option value="1">Expenditure Paper</option>
+    <option value="2">Archived Paper</option>
 </select>
 
 <select class="form-control col-md-4" required  name="papertype" class="form-control col-md-4">
@@ -202,10 +207,11 @@ onfocus="(this.type='date')"  name="start_date"/>
 <input placeholder="End Date -- Anything" class="form-control col-md-4" type="text" 
 onfocus="(this.type='date')"  name="end_date"  />
 
-<button class="btn btn-dark  btn-block" type="submit">Submit</button>
+<button class="btn btn-primary  btn-block" type="submit">Submit</button>
 
 </form>
-
+        </div>
+        <div class="row">
 <?php
 if(isset($_GET['priority'])){
                 $param_priority=$priority;

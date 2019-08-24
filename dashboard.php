@@ -1,7 +1,12 @@
-<?php  if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    }  ?>
+<?php
+ if(!isset($_SESSION)) 
+ { 
+     session_start(); 
+ }
+if(!isset($_SESSION['user'])){
+    header('Location: error.php');
+}
+?>
 <?php include_once('displaypaper.php'); ?>
 
 <!DOCTYPE html>
@@ -27,7 +32,7 @@
                         <li class="nav-item" role="presentation">
                         <a 
                         href="add_paper_form.php">
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary rounded-0">
                         Add a Paper
                         </button>
                         </a>
@@ -40,7 +45,7 @@
                     <li class="nav-item" role="presentation">
                         <a 
                         href="dashboard.php?view=1">
-                        <button class="btn btn-warning">
+                        <button class="btn btn-warning rounded-0">
                         Pending Papers
                         </button>
                         </a>
@@ -48,7 +53,7 @@
                     <li class="nav-item" role="presentation">
                         <a 
                         href="dashboard.php?view=2">
-                        <button class="btn btn-success">
+                        <button class="btn btn-success rounded-0">
                         Approved Papers
                         </button>
                         </a>
@@ -56,7 +61,7 @@
                     <li class="nav-item" role="presentation">
                         <a 
                         href="dashboard.php?view=3">
-                        <button class="btn btn-danger">
+                        <button class="btn btn-danger rounded-0">
                         Rejected Papers
                         </button>
                         </a>
@@ -64,7 +69,7 @@
                     <li class="nav-item" role="presentation">
                         <a 
                         href="advanced_filter.php">
-                        <button class="btn btn-info">
+                        <button class="btn btn-info rounded-0">
                         Advanced Filters
                         </button>
                         </a>
@@ -72,7 +77,7 @@
                     </ul>
                     <span class="navbar-text actions"> 
                         <b class="text-white"><?php echo ucwords($_SESSION['user']); ?></b>
-                    <a class="btn btn-warning text-dark " role="button" href="login_manager.php?logout=1">Log Out
+                    <a class="btn btn-warning text-dark rounded-0" role="button" href="login_manager.php?logout=1">Log Out
 
                     </a>
                     </span>

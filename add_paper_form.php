@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
-
+<?php
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+if(!isset($_SESSION['user'])){
+    header('Location: error.php');
+}
+?>
 <?php include_once('header.php');?>
 <?php include_once('db_connection.php');?>
 <body>
@@ -19,7 +27,7 @@
                     <li class="nav-item" role="presentation">
                             <a class="nav-link active"
                             href="dashboard.php">
-                            <button class="btn btn-info">
+                            <button class="btn btn-info rounded-0">
                             Go To Dashboard
                             </button>
                             </a>
@@ -34,7 +42,7 @@
                             session_start(); 
                         } 
                         echo ucwords($_SESSION['user']); ?></b>
-                    <a class="btn btn-warning " role="button" href="login_manager.php?logout=1">Log Out
+                    <a class="btn btn-warning rounded-0" role="button" href="login_manager.php?logout=1">Log Out
 
                     </a>
                 </span>

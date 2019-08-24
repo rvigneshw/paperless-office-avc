@@ -6,15 +6,4 @@
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <link rel="stylesheet" href="assets/iconsicon.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
-    <style >
-        .card-columns {
-        @include media-breakpoint-only(lg) {
-        column-count: 4;
-        }
-        @include media-breakpoint-only(xl) {
-        column-count: 5;
-        }
-        }
-        
-    </style>
 </head>

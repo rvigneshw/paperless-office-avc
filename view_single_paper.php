@@ -1,3 +1,12 @@
+<?php
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+if(!isset($_SESSION['user'])){
+    header('Location: error.php');
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -52,15 +61,15 @@ if(isset($_GET['id'])){
                     <?php 
                     if($result['paper_submitted_person']==$_SESSION['user']){ ?>
                         <li class="nav-item " role="presentation">
-                        <a class="nav-link active" href="edit_paper_form.php?id=<?php echo  $id; ?>">
-                        <button class="btn btn-info">
+                        <a  href="edit_paper_form.php?id=<?php echo  $id; ?>">
+                        <button class="btn btn-warning rounded-0">
                             Edit Paper
                         </button>
                         </a>
                         </li>
                         <li class="nav-item " role="presentation">
-                        <a class="nav-link active" href="paper_crud_manager.php?delete=<?php echo  $id; ?>">
-                        <button class="btn btn-info">
+                        <a  href="paper_crud_manager.php?delete=<?php echo  $id; ?>">
+                        <button class="btn btn-danger rounded-0">
                             Delete Paper
                         </button>
                         </a>
@@ -69,24 +78,24 @@ if(isset($_GET['id'])){
                     }else{
                     ?>
                         <li class="nav-item " role="presentation">
-                        <a class="nav-link active" href="paper_crud_manager.php?approve=1&id=<?php echo  $id; ?>">
-                            <button class="btn btn-success">
+                        <a  href="paper_crud_manager.php?approve=1&id=<?php echo  $id; ?>">
+                            <button class="btn btn-success rounded-0">
                             Approve Paper
                             </button>
                         </a>
                         </li>
                         <li class="nav-item" role="presentation">
-                        <a class="nav-link active" href="paper_crud_manager.php?approve=2&id=<?php echo  $id; ?>">
-                            <button class="btn btn-danger rounded">
+                        <a  href="paper_crud_manager.php?approve=2&id=<?php echo  $id; ?>">
+                            <button class="btn btn-danger rounded-0">
                             Reject Paper
                             </button>
                         </a>
                         </li>
                     <?php } ?>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active"
+                            <a 
                             href="dashboard.php">
-                            <button class="btn btn-info">
+                            <button class="btn btn-info rounded-0">
                             Go To Dashboard
                             </button>
                             </a>

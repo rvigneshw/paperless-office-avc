@@ -1,10 +1,11 @@
 <?php
+
 include_once('db_connection.php');
  if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
-
+    include_once('auth.php');
 if(isset($_GET['approve'])){
     var_dump($_GET);
     $paperId=$_GET['id'];

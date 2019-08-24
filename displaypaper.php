@@ -1,4 +1,13 @@
 <?php
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+if(!isset($_SESSION['user'])){
+    header('Location: error.php');
+}
+?>
+<?php
 
 define("NOCONDITION", -1);
 function default_view($paper_sts,$dept_code){
@@ -165,15 +174,15 @@ if ($result->num_rows > 0) {
     echo '<center><div class="card-columns">';
     while($row = $result->fetch_assoc()) {
 
-        if ($row['isApproved']==1) {
+        if ($row['isApproved']==0) {
             $paperTypePill='<button type="button" class="btn btn-primary">
             P
             </button>';
-        }elseif ($row['isApproved']==2) {
+        }elseif ($row['isApproved']==1) {
             $paperTypePill='<button type="button" class="btn btn-warning">
             E
             </button>';
-        }elseif ($row['isApproved']==3) {
+        }elseif ($row['isApproved']==2) {
             $paperTypePill='<button type="button" class="btn btn-danger">
             A
             </button>';
@@ -217,12 +226,12 @@ if ($result->num_rows > 0) {
             '.$paperTypePill.'
             '.$prioritytag.'
             </div>
-            <div class="btn-group btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-primary">
+            <div class="btn-group " role="group" aria-label="...">
+            <button type="button" class="btn btn-dark border-white ">
             '.$row['department_name']  .'
             </button>
 
-            <button type="button" class="btn btn-light text-right">
+            <button type="button" class="btn btn-dark border-white text-right">
             Rs:'.$row['amount'].'
             </button>
             </div>
@@ -230,7 +239,7 @@ if ($result->num_rows > 0) {
             <div class="btn-group btn-group" role="group" aria-label="...">
             '.$editButtonTag.'
             <a class="btn btn-primary" href="'.$url.'">
-            View Paper
+            View
             </a>
             </div>
             </div>
