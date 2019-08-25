@@ -12,6 +12,7 @@
         } 
         unset($_SESSION['user']);
         unset($_SESSION['dept']);
+        unset($_SESSION['error']);
         header("location: index.php");
        }
    }
