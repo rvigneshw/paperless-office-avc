@@ -48,7 +48,7 @@ if(isset($_GET['approve'])){
                 WHERE  `id`=".$paperId;
         
         if (query_custom($sql) === TRUE) {
-            echo "update done";
+            header("location: dashboard.php");
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
@@ -98,7 +98,7 @@ if(isset($_POST['addpaper'])){
         ";
         // echo $sql;
         if (query_custom($sql) === TRUE) {
-            echo "New record created successfully";
+            header("location: dashboard.php");
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
@@ -128,7 +128,7 @@ if(isset($_POST['editpaper'])){
       WHERE `id`=".$paperid;
         // echo $sql;
         if (query_custom($sql) === TRUE) {
-            echo "New record created successfully";
+            header("location: dashboard.php");
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
@@ -139,7 +139,7 @@ if(isset($_GET['delete'])){
     $dept_id=$_SESSION['dept'];
     $sql="DELETE FROM `papers` WHERE `id`='".$id."' AND`department_id`='".$dept_id."'";
     if (query_custom($sql) === TRUE) {
-        echo "update done";
+        header("location: dashboard.php");
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
