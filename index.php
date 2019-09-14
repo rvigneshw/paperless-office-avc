@@ -32,7 +32,7 @@ Welcome to,
         }
         ?>
   <br>
-  Developed with &#128151 by Dept of CSE: 2017-2021
+  Developed with &#128151 by Dept of CSE: 2017-2021.
 </form>    
 </body>
 </html>
