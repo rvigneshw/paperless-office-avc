@@ -33,6 +33,7 @@ if(isset($_GET['id'])){
     $subject=$result['subject'];
     $isApproved=$result['isApproved'];
     $content=$result['content'];
+    $amount=$result['amount'];
     // var_dump($result);
     $commentsSql="SELECT * FROM `queries` WHERE `paper_id`=".$id;
     $comment_data = query_custom($commentsSql);
@@ -151,6 +152,10 @@ if(isset($_GET['id'])){
                         <tr>
                             <td><b> Paper Type: </b></td>
                             <td><?php echo $paper_type_name; ?></td>
+                        </tr>
+                        <tr>
+                            <td><b> Amount: </b></td>
+                            <td><?php echo $amount; ?></td>
                         </tr>
                     </tbody>
                 </table>

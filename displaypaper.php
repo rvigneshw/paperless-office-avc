@@ -25,19 +25,19 @@ function default_view($paper_sts,$dept_code){
 
         switch ($dept_code) { //For Pending Paper
             case 1:
-                $p_sts_of_manager=NOCONDITION;
-                $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_manager=2;
+                $p_sts_of_principal=2;
                 $p_sts_of_secretary=1;
                 break;
             case 2:
-                $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_manager=2;
                 $p_sts_of_principal=1;
-                $p_sts_of_secretary=NOCONDITION;
+                $p_sts_of_secretary=0;
                 break;
             case 3:
                 $p_sts_of_manager=1;
-                $p_sts_of_principal=NOCONDITION;
-                $p_sts_of_secretary=NOCONDITION;
+                $p_sts_of_principal=0;
+                $p_sts_of_secretary=0;
                 break;
         }
 
@@ -45,12 +45,12 @@ function default_view($paper_sts,$dept_code){
         
         switch ($dept_code) { //For Approved Paper
             case 1:
-                $p_sts_of_manager=NOCONDITION;
-                $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_manager=2;
+                $p_sts_of_principal=2;
                 $p_sts_of_secretary=2;
                 break;
             case 2:
-                $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_manager=2;
                 $p_sts_of_principal=2;
                 $p_sts_of_secretary=NOCONDITION;
                 break;
@@ -65,12 +65,12 @@ function default_view($paper_sts,$dept_code){
 
         switch ($dept_code) { //For Rejected Paper
             case 1:
-                $p_sts_of_manager=NOCONDITION;
-                $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_manager=3;
+                $p_sts_of_principal=3;
                 $p_sts_of_secretary=3;
                 break;
             case 2:
-                $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_manager=3;
                 $p_sts_of_principal=3;
                 $p_sts_of_secretary=NOCONDITION;
                 break;

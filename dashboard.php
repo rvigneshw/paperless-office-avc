@@ -95,16 +95,17 @@ if(!isset($_SESSION['user'])){
 
 <?php
 
-
+$dept=$_SESSION['dept'];
 if(!isset($_GET['view'])){
     header("location: dashboard.php?view=1");
 }
+
 if($_GET['view']==1){
-    default_view(1,3);
+    default_view(1,$dept);
 }elseif($_GET['view']==2){
-    default_view(2,3);
+    default_view(2,$dept);
 }elseif ($_GET['view']==3) {
-    default_view(3,3);
+    default_view(3,$dept);
 }else{
     echo "invalid";
 }
