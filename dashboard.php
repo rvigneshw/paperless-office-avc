@@ -66,13 +66,22 @@ if(!isset($_SESSION['user'])){
                         </button>
                         </a>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <a 
-                        href="advanced_filter.php">
-                        <button class="btn btn-info rounded-0">
-                        Advanced Filters
-                        </button>
+                    <li class="nav-item dropdown">
+                        <a class=" dropdown-toggle btn btn-info rounded-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        More Options
                         </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="advanced_filter.php">
+                            <button class="btn btn-info rounded-0">
+                            Advanced Filters
+                            </button>
+                            </a>
+                            <a class="dropdown-item" href="dashboard.php?view=4">
+                            <button class="btn btn-warning rounded-0">
+                            Archived Papers
+                            </button>
+                            </a>
+                        </div>
                     </li>
                     </ul>
                     <span class="navbar-text actions"> 
@@ -106,6 +115,8 @@ if($_GET['view']==1){
     default_view(2,$dept);
 }elseif ($_GET['view']==3) {
     default_view(3,$dept);
+}elseif ($_GET['view']==4) {
+    default_view(4,$dept);
 }else{
     echo "invalid";
 }
