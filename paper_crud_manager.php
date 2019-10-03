@@ -48,6 +48,24 @@ if(isset($_GET['approve'])){
                 WHERE  `id`=".$paperId;
         
         if (query_custom($sql) === TRUE) {
+            $check_whether_paper_to_add_to_funds_table="SELECT * FROM `papers` WHERE `isApproved`=2 AND `id`=".$paperId;
+            $fund_res=query_custom($check_whether_paper_to_add_to_funds_table);
+            if ($fund_res->num_rows > 0) {
+                var_dump($fund_res);
+                $status = $fund_res->fetch_assoc();
+                
+                $amount=$status['amount'];
+                $budget_id=2;
+                $insert_to_expense='INSERT INTO `expenses_table`(`paper_id`, `budget_id`, `amount`, `created_at`, `updated_at`) VALUES ('.$paperId.','.$budget_id.','.$amount.',NOW(),NOW())';
+                // echo $insert_to_expense;
+                query_custom($insert_to_expense);
+                //     echo "good";
+                //     die();
+                // }else{
+                //     echo "bad";
+                //     die();
+                // }
+            }
             header("location: dashboard.php");
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;

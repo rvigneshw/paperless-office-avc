@@ -112,6 +112,9 @@ function default_view($paper_sts,$dept_code){
         }
     }elseif ($paper_sts==4) {
         $p_isApproved=2;
+        $p_sts_of_manager=NOCONDITION;
+        $p_sts_of_principal=NOCONDITION;
+        $p_sts_of_secretary=NOCONDITION;
     }
 
     
@@ -148,7 +151,7 @@ if($param_department==NOCONDITION){
 }
 
 if($param_isApproved==NOCONDITION){
-    $isApproved_condtion=" `isApproved` <=2 AND ";
+    $isApproved_condtion=" `isApproved` <=1 AND ";
 }else{
     $isApproved_condtion=" `isApproved`='".$param_isApproved."' AND ";
 }
@@ -248,6 +251,24 @@ if ($result->num_rows > 0) {
         $ts=$row['created_at'];
         $date=date("F j, Y, g:i a",strtotime($ts));
         $content=truncate($row['content'],20);
+
+        if ($row['isApproved']==2) {
+            $footer_text="This Paper has been Archieved !";
+        }else{
+            $footer_text='<div class="btn-group btn-group" role="group" aria-label="...">
+            <button type="button" class="btn '.$status_of_manager_btn_class.'">
+            Manager:</br>'.$status_of_manager_stmt.'
+            </button>
+            <button type="button" class="btn '.$status_of_principal_btn_class.'">
+            Principal:</br>'.$status_of_principal_stmt.'
+            </button>
+            <button type="button" class="btn '.$status_of_secretary_btn_class.'">
+            Secretary:</br>'.$status_of_secretary_stmt.'
+            </button>
+            </div>';
+    
+        }
+        
         echo '
             <div class="card mb-4 border-dark" style="width: 25rem; margin:1rem;">
             <div class="card-header bg-dark text-white ">
@@ -282,18 +303,7 @@ if ($result->num_rows > 0) {
                 </button >
             </div>
             <div class="card-footer bg-transparent">
-            <div class="btn-group btn-group" role="group" aria-label="...">
-            <button type="button" class="btn '.$status_of_manager_btn_class.'">
-            Manager:</br>'.$status_of_manager_stmt.'
-            </button>
-            <button type="button" class="btn '.$status_of_principal_btn_class.'">
-            Principal:</br>'.$status_of_principal_stmt.'
-            </button>
-            <button type="button" class="btn '.$status_of_secretary_btn_class.'">
-            Secretary:</br>'.$status_of_secretary_stmt.'
-            </button>
-
-            </div>
+                '.$footer_text.'
             </div>
             </div>';
     }

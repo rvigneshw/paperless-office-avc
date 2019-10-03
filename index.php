@@ -4,6 +4,9 @@ include_once('header.php');
     { 
         session_start(); 
     } 
+    if(isset($_SESSION['user'])){
+      header('Location: dashboard.php');
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +36,8 @@ Welcome to,
         ?>
   <br>
   Developed with &#128151 by Dept of CSE: 2017-2021.
+  <br>
+  <a href="./po_admin">Go to admin login instead</a>
 </form>    
 </body>
 </html>
@@ -104,7 +109,7 @@ body {
 .login > button {
   font-family: "Asap", sans-serif;
   cursor: pointer;
-  color: #fff;
+  color: #000;
   font-size: 16px;
   text-transform: uppercase;
   width: 80px;
@@ -113,13 +118,13 @@ body {
   margin-top: 10px;
   margin-left: -5px;
   border-radius: 5px;
-  background-color: #4278f5;
+  background-color: #d79922;
   -webkit-transition: background-color 300ms;
   -moz-transition: background-color 300ms;
   transition: background-color 300ms;
 }
 .login > button:hover {
-  background-color: #f24353;
+  background-color: #efe2ba;
 }
 
 @-webkit-keyframes wawes {

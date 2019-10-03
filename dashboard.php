@@ -67,7 +67,7 @@ if(!isset($_SESSION['user'])){
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class=" dropdown-toggle btn btn-info rounded-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="dropdown-toggle btn btn-light rounded-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         More Options
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -97,10 +97,6 @@ if(!isset($_SESSION['user'])){
         </nav>
     
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js">
-    </script>
 
 <?php
 

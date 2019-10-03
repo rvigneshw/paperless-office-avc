@@ -6,8 +6,8 @@ include_once('db_connection.php');
     } 
 if(isset($_POST['addanswer'])){
 
-    $answerText=$_SESSION['user']." Answered:";
-    $response=$answerText.$_POST["response"];
+    $answerText=$_SESSION['user']." Answered:";    
+    $response=htmlspecialchars($answerText.$_POST["response"], ENT_QUOTES);
     $id=$_POST["id"];
     $paperid=$_POST["paperid"];
 
@@ -27,7 +27,7 @@ if(isset($_POST['addquery'])){
     
     
     $askText=$_SESSION['user']." Asked:";
-    $query=$askText.$_POST["query"];
+    $query=htmlspecialchars($askText.$_POST["query"], ENT_QUOTES);
     $addquery=$_POST["addquery"];
     $paperid=$_POST["paperid"];
 
