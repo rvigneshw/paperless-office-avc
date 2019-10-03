@@ -75,6 +75,8 @@
 
 <li><a href="users.php"> <i class="glyphicon glyphicon-user"></i>Users <span class="pull-right"><?=counting("users", "id")?></span></a></li>
 
+<li><a href="advanced_operations.php"> <i class="glyphicon glyphicon-fire"></i>Advanced Operations</a></li>
+
 <li><a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
 				</ul>
 				
