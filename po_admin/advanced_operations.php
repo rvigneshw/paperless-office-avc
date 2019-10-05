@@ -20,7 +20,7 @@ Reset Database
 <!-- </a> -->
 <script>
 function check() {
-    if(confirm("Are You Sure?")===true){
+    if(confirm("Are You Sure?It leads to deletion of entire database(Taking a backup of Current Database is hugely adviced)")===true){
         window.location = "import_reset_database.php";
     }
 }
