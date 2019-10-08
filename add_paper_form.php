@@ -62,9 +62,15 @@ if(!isset($_SESSION['user'])){
     width:80%">
 <br>
     <h2>Add Paper</h2>
-<form action="paper_crud_manager.php" method="post">
-    <div class="form-group ">
+<form action="paper_crud_manager.php" method="post" enctype="multipart/form-data">
+    
+    <div class="form-row">
+    <div class="form-group col-md-9">
       <input required type="text" class="form-control" name="subject" placeholder="Subject">
+    </div>
+    <div class="form-group col-md-3">
+      <input class="form-control" type="file" name="file[]" id="file" multiple>
+    </div>
     </div>
 
   <div class="form-row">

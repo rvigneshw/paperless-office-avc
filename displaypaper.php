@@ -197,7 +197,7 @@ if($param_paper_type==NOCONDITION){
 
 $sql=$select_query.$department_id_condtion.$isApproved_condtion.$priority_condtion.$status_of_manager_condtion.$status_of_principal_condtion.$status_of_secretary_condtion.$updated_at_condtion.$paper_type_condtion;
 
-// echo $sql;
+echo $sql;
 // die();
 
 $result = query_custom($sql);

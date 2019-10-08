@@ -281,6 +281,9 @@ INSERT INTO `users` (`id`, `username`, `password`, `designation`, `remember_toke
 --
 -- Constraints for dumped tables
 --
+DROP TABLE IF EXISTS `paper_all`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `paper_all`  AS  select `papers`.`id` AS `id`,`papertype`.`paper_type_name` AS `paper_type_name`,`department`.`department_name` AS `department_name`,`papers`.`subject` AS `subject`,`papers`.`isApproved` AS `isApproved`,`papers`.`content` AS `content`,`papers`.`associated_files_path` AS `associated_files_path`,`papers`.`priority` AS `priority`,`papers`.`created_at` AS `created_at`,`papers`.`paper_submitted_person` AS `paper_submitted_person`,`papers`.`amount` AS `amount`,`papers`.`status_of_manager` AS `status_of_manager`,`papers`.`status_of_principal` AS `status_of_principal`,`papers`.`status_of_secretary` AS `status_of_secretary`,`papers`.`last_modified_person` AS `last_modified_person`,`papers`.`updated_at` AS `updated_at` from ((`papers` join `papertype`) join `department`) where ((`papers`.`paper_type` = `papertype`.`paper_type_id`) and (`papers`.`department_id` = `department`.`dept_id`)) ;
 
 --
 -- Constraints for table `expenses_table`

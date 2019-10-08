@@ -12,6 +12,7 @@ if(!isset($_SESSION['user'])){
 
 <?php include_once('header.php');?>
 <?php include_once('db_connection.php');?>
+<?php include_once('functions.php');?>
 <?php
  if(!isset($_SESSION)) 
     { 
@@ -34,9 +35,16 @@ if(isset($_GET['id'])){
     $isApproved=$result['isApproved'];
     $content=$result['content'];
     $amount=$result['amount'];
+    $associated_files_path=$result['associated_files_path'];
     // var_dump($result);
     $commentsSql="SELECT * FROM `queries` WHERE `paper_id`=".$id;
     $comment_data = query_custom($commentsSql);
+    $fileCount=getFilesCount($associated_files_path);
+    if($fileCount==0){
+        $showFilesText="No Files to show";
+    }else{
+        $showFilesText="Show All ".$fileCount." Files";
+    }
     
 }else{
     header('Location: error.php');
@@ -157,6 +165,17 @@ if(isset($_GET['id'])){
                             <td><b> Amount: </b></td>
                             <td><?php echo $amount; ?></td>
                         </tr>
+                        <tr>
+                            <td><b> Files:  </b></td>
+                            <td >
+                            <button onclick="collapseToggle()" class="btn btn-primary" type="button" >
+                                <?php echo $showFilesText; ?>
+                            </button>
+                            <div class="collapse" id="collapseExample">
+                            <?php echo getDirContentsurl($associated_files_path); ?>
+                            </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <?php echo htmlspecialchars_decode($content); ?>
@@ -237,5 +256,10 @@ echo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
+<script>
+function collapseToggle() {
+    $('#collapseExample').collapse('toggle');
+}
+</script>
 
 </html>

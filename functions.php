@@ -131,4 +131,18 @@ function get_approval_string($param_approve_code)
             break;
     }
 }
+
+function getDirContentsurl($dir, &$results = array()){
+    $allFiles = scandir($dir);
+    $files=array_diff($allFiles, array('.', '..'));
+    foreach ($files as $key => $value) {
+        echo '<a class="btn btn-primary" href="'.$dir.$value.'">'.$value.'</a><br>';
+    }
+}
+
+function getFilesCount($dir)
+{
+    $allFiles = scandir($dir);
+    return count($allFiles)-2;
+}
 ?>

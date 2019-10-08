@@ -76,13 +76,26 @@ if(isset($_GET['approve'])){
 
 // Add paper
 if(isset($_POST['addpaper'])){
-    $subject=$_POST['subject'];
+     $subject=$_POST['subject'];
      $priority=$_POST['priority'];
      $papertype=$_POST['papertype'];
      $amount=$_POST['amount'];
      $content=htmlspecialchars($_POST['content'], ENT_QUOTES);
      $department=$_SESSION['dept'];
      $submittedPerson=$_SESSION['user']; 
+     $current_timestamp = time();
+     $associated_files_path="uploads/".$subject."-".$current_timestamp."/";
+     $countfiles = count($_FILES['file']['name']);
+
+     if (!file_exists($associated_files_path)) {
+        mkdir($associated_files_path, 0777, true);
+    }
+
+    for($i=0;$i<$countfiles;$i++){
+        $filepath=$associated_files_path.basename($_FILES["file"]["name"][$i]);
+        move_uploaded_file($_FILES['file']['tmp_name'][$i],$filepath);
+        echo $filepath;
+    }
 
      $sql = "INSERT INTO `papers`(
         `paper_type`,
@@ -104,7 +117,7 @@ if(isset($_POST['addpaper'])){
              '".$subject."',
              '". 0 ."',
              '".$content."',
-             '".null."',
+             '".$associated_files_path."',
              '".$priority."',
              '".$submittedPerson."',
              '".$amount."',
@@ -116,6 +129,7 @@ if(isset($_POST['addpaper'])){
         ";
         // echo $sql;
         if (query_custom($sql) === TRUE) {
+            
             header("location: dashboard.php");
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
@@ -133,12 +147,27 @@ if(isset($_POST['editpaper'])){
     $paperid=$_POST['paperid'];
     $submittedPerson=$_SESSION['user']; 
 
+    $current_timestamp = time();
+    $associated_files_path="uploads/".$subject."-".$current_timestamp."/";
+    $countfiles = count($_FILES['file']['name']);
+
+    if (!file_exists($associated_files_path)) {
+       mkdir($associated_files_path, 0777, true);
+   }
+
+   for($i=0;$i<$countfiles;$i++){
+       $filepath=$associated_files_path.basename($_FILES["file"]["name"][$i]);
+       move_uploaded_file($_FILES['file']['tmp_name'][$i],$filepath);
+       echo $filepath;
+   }
+
      $sql ="UPDATE `papers` SET 
      `paper_type`='".$papertype."',
      `subject`='".$subject."',
      `content`='".$content."',
      `priority`='".$priority."',
      `amount`='".$amount."',
+     `associated_files_path`='".$associated_files_path."',
      `status_of_manager`=1,
      `status_of_principal`=0,
      `status_of_secretary`=0,
