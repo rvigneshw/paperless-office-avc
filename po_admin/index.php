@@ -28,6 +28,9 @@
 					<button class="btn btn-lg btn-primary btn-block" type="submit">
 						Sign in</button>
 					</form>
+					<a href="../"><button class="btn btn-lg btn-warning btn-block" type="submit">
+						Go To  User login</button>
+						</a>
 				</div>
 			</div>
 		</div>
