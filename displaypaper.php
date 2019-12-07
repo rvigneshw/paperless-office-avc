@@ -10,41 +10,54 @@ if(!isset($_SESSION['user'])){
 <?php
 
 define("NOCONDITION", -1);
-function default_view($paper_sts,$dept_code){
 
-    // echo $dept_code;
-    // echo $paper_sts;
+function default_view($paper_sts,$dept_code,$cond_dept=NOCONDITION){
+    $debug=1;
+    echo $dept_code;
+    echo $paper_sts;
+    echo $cond_dept;
     $p_priority=NOCONDITION;
     $p_isApproved=NOCONDITION;
     $p_paper_type=NOCONDITION;
     $p_start_date=NOCONDITION;
     $p_end_date=NOCONDITION;
 
-    if($dept_code<=3){
-        $p_department=NOCONDITION;
+    if($dept_code<=4){
+        if($cond_dept==NOCONDITION){
+            $p_department=NOCONDITION;
+        }else{
+            $p_department=$cond_dept;
+        }        
     }else{
         $p_department=$dept_code;
         switch ($paper_sts) { 
             case 1://For Pending Paper
+                $p_returned_for_query=NOCONDITION;
                 $p_sts_of_manager=1;
                 $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_secretary=NOCONDITION;
                 break;
             case 2://For Approved Paper
+                $p_returned_for_query=NOCONDITION;
                 $p_sts_of_manager=2;
                 $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_secretary=NOCONDITION;
                 break;
             case 3://For Rejected Paper
+                $p_returned_for_query=NOCONDITION;
                 $p_sts_of_manager=3;
                 $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_secretary=NOCONDITION;
                 break;
-            case 4://For Rejected Paper
+            case 4://For Returned Paper
+                $p_returned_for_query=1;
                 $p_sts_of_manager=NOCONDITION;
                 $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_secretary=NOCONDITION;
-                $p_isApproved=2;
                 break;
         }
         
@@ -54,17 +67,30 @@ function default_view($paper_sts,$dept_code){
 
         switch ($dept_code) { //For Pending Paper
             case 1: //For secretary 
+                $p_returned_for_query=NOCONDITION;
                 $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_principal=NOCONDITION;
                 $p_sts_of_secretary=1;
                 break;
             case 2: //For Principal
+                $p_returned_for_query=NOCONDITION;
                 $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_principal=1;
                 $p_sts_of_secretary=NOCONDITION;
                 break;
-            case 3: //For Manager
+            case 3: //For Director
+                $p_returned_for_query=NOCONDITION;
+                $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_director=1;
+                $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_secretary=NOCONDITION;
+                break;
+            case 4: //For Manager
+                $p_returned_for_query=NOCONDITION;
                 $p_sts_of_manager=1;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_principal=NOCONDITION;
                 $p_sts_of_secretary=NOCONDITION;
                 break;
@@ -74,18 +100,31 @@ function default_view($paper_sts,$dept_code){
         
         switch ($dept_code) { //For Approved Paper
             case 1: //For secretary 
+                $p_returned_for_query=NOCONDITION;
                 $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_principal=NOCONDITION;
                 $p_sts_of_secretary=NOCONDITION;
                 $p_isApproved=1;
                 break;
             case 2: //For Principal
+                $p_returned_for_query=NOCONDITION;
                 $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_principal=2;
                 $p_sts_of_secretary=NOCONDITION;
                 break;
-            case 3: //For Manager
+            case 3: //For Director
+                $p_returned_for_query=NOCONDITION;
+                $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_director=2;
+                $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_secretary=NOCONDITION;
+                break;
+            case 4: //For Manager
+                $p_returned_for_query=NOCONDITION;
                 $p_sts_of_manager=2;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_principal=NOCONDITION;
                 $p_sts_of_secretary=NOCONDITION;
                 break;
@@ -95,40 +134,91 @@ function default_view($paper_sts,$dept_code){
 
         switch ($dept_code) { //For Rejected Paper
             case 1: //For secretary 
+                $p_returned_for_query=NOCONDITION;
                 $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_principal=NOCONDITION;
                 $p_sts_of_secretary=3;
                 break;
             case 2: //For Principal
+                $p_returned_for_query=NOCONDITION;
                 $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_principal=3;
                 $p_sts_of_secretary=NOCONDITION;
                 break;
-            case 3: //For Manager
+            case 3: //For Director
+                $p_returned_for_query=NOCONDITION;
+                $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_director=3;
+                $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_secretary=NOCONDITION;
+                break;
+            case 4: //For Manager
+                $p_returned_for_query=NOCONDITION;
                 $p_sts_of_manager=3;
+                $p_sts_of_director=NOCONDITION;
                 $p_sts_of_principal=NOCONDITION;
                 $p_sts_of_secretary=NOCONDITION;
                 break;
         }
     }elseif ($paper_sts==4) {
-        $p_isApproved=2;
-        $p_sts_of_manager=NOCONDITION;
-        $p_sts_of_principal=NOCONDITION;
-        $p_sts_of_secretary=NOCONDITION;
+        switch ($dept_code) { //For Returned Paper
+            case 1: //For secretary 
+                $p_returned_for_query=1;
+                $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_director=NOCONDITION;
+                $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_secretary=1;
+                break;
+            case 2: //For Principal
+                $p_returned_for_query=1;
+                $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_director=NOCONDITION;
+                $p_sts_of_principal=1;
+                $p_sts_of_secretary=NOCONDITION;
+                break;
+            case 3: //For Manager
+                $p_returned_for_query=1;
+                $p_sts_of_manager=NOCONDITION;
+                $p_sts_of_director=1;
+                $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_secretary=NOCONDITION;
+                break;
+            case 4: //For Manager
+                $p_returned_for_query=1;
+                $p_sts_of_manager=1;
+                $p_sts_of_director=NOCONDITION;
+                $p_sts_of_principal=NOCONDITION;
+                $p_sts_of_secretary=NOCONDITION;
+                break;
+        }
+    }elseif($paper_sts==5){
+        echo "sone";
     }
 
     
 
-    display_cards($p_priority,$p_isApproved,$p_paper_type,$p_sts_of_manager,$p_sts_of_principal,$p_sts_of_secretary,$p_department,$p_start_date,$p_end_date);
-
-
-
-
+    display_cards($p_priority,$p_isApproved,$p_paper_type,$p_sts_of_manager,$p_sts_of_director,$p_sts_of_principal,$p_sts_of_secretary,$p_department,$p_start_date,$p_end_date,$p_returned_for_query);
+    
+        
+    // echo "p_priority".$p_priority;
+    // echo "p_isApproved".$p_isApproved;
+    // echo "p_paper_type".$p_paper_type;
+    // echo "p_sts_of_manager".$p_sts_of_manager;
+    // echo "p_sts_of_director".$p_sts_of_director;
+    // echo "p_sts_of_principal".$p_sts_of_principal;
+    // echo "p_sts_of_secretary".$p_sts_of_secretary;
+    // echo "p_department".$p_department;
+    // echo "p_start_date".$p_start_date;
+    // echo "p_end_date".$p_end_date;
+    // echo "p_returned_for_query".$p_returned_for_query;
+    
 }
 
 
 function display_cards($param_priority,$param_isApproved,$param_paper_type,
-$param_sts_of_manager,$param_sts_of_principal,$param_sts_of_secretary,$param_department,$param_start_date,$param_end_date)
+$param_sts_of_manager,$param_sts_of_director,$param_sts_of_principal,$param_sts_of_secretary,$param_department,$param_start_date,$param_end_date,$param_returned_for_query)
 {
     if(empty($conn)){
         include_once('db_connection.php');
@@ -167,6 +257,12 @@ if($param_sts_of_manager==NOCONDITION){
 }else{
     $status_of_manager_condtion=" `status_of_manager`='".$param_sts_of_manager."' AND ";
 }
+if($param_sts_of_director==NOCONDITION){
+    $status_of_director_condtion=" 1 AND ";
+}else{
+    $status_of_director_condtion=" `status_of_director`='".$param_sts_of_director."' AND ";
+}
+
 if($param_sts_of_principal==NOCONDITION){
     $status_of_principal_condtion=" 1 AND ";
 }else{
@@ -189,16 +285,23 @@ elseif($param_end_date==NOCONDITION){
     $updated_at_condtion=" Date(updated_at) BETWEEN  '".$param_start_date."' AND '".$param_end_date."' AND";
 }
 
+if($param_returned_for_query==NOCONDITION){
+    $returned_for_query_condtion=" 1 AND";
+}else{
+    $returned_for_query_condtion=" `returned_for_query` >0 AND ";
+}
+
+
 if($param_paper_type==NOCONDITION){
     $paper_type_condtion=" 1 )";
 }else{
     $paper_type_condtion=" `paper_type`='".$param_paper_type."')";
 }
 
-$sql=$select_query.$department_id_condtion.$isApproved_condtion.$priority_condtion.$status_of_manager_condtion.$status_of_principal_condtion.$status_of_secretary_condtion.$updated_at_condtion.$paper_type_condtion;
+$sql=$select_query.$department_id_condtion.$isApproved_condtion.$priority_condtion.$status_of_manager_condtion.$status_of_director_condtion.$status_of_principal_condtion.$status_of_secretary_condtion.$updated_at_condtion.$returned_for_query_condtion.$paper_type_condtion;
 
-// echo $sql;
-// die();
+        echo $sql;
+        // die();
 
 $result = query_custom($sql);
 
@@ -236,14 +339,17 @@ if ($result->num_rows > 0) {
         }
 
         $status_of_manager_code=$row['status_of_manager'];
+        $status_of_director_code=$row['status_of_director'];
         $status_of_principal_code=$row['status_of_principal'];
         $status_of_secretary_code=$row['status_of_secretary'];
 
         $status_of_manager_stmt=get_string_for_single_status_code($status_of_manager_code);
+        $status_of_director_stmt=get_string_for_single_status_code($status_of_director_code);
         $status_of_principal_stmt=get_string_for_single_status_code($status_of_principal_code);
         $status_of_secretary_stmt=get_string_for_single_status_code($status_of_secretary_code);
 
         $status_of_manager_btn_class=get_class_name_for_code($status_of_manager_code);
+        $status_of_director_btn_class=get_class_name_for_code($status_of_director_code);
         $status_of_principal_btn_class=get_class_name_for_code($status_of_principal_code);
         $status_of_secretary_btn_class=get_class_name_for_code($status_of_secretary_code);
 
@@ -255,9 +361,12 @@ if ($result->num_rows > 0) {
         if ($row['isApproved']==2) {
             $footer_text="This Paper has been Archieved !";
         }else{
-            $footer_text='<div class="btn-group btn-group" role="group" aria-label="...">
+            $footer_text='<div class="btn-group btn-group shadow-card" role="group" aria-label="...">
             <button type="button" class="btn '.$status_of_manager_btn_class.'">
             Manager:</br>'.$status_of_manager_stmt.'
+            </button>
+            <button type="button" class="btn '.$status_of_director_btn_class.'">
+            Director:</br>'.$status_of_director_stmt.'
             </button>
             <button type="button" class="btn '.$status_of_principal_btn_class.'">
             Principal:</br>'.$status_of_principal_stmt.'
@@ -270,13 +379,13 @@ if ($result->num_rows > 0) {
         }
         
         echo '
-            <div class="card mb-4 border-dark" style="width: 25rem; margin:1rem;">
+            <div class="card shadow-card mb-4 border-dark" style="width: 25rem; margin:1rem;">
             <div class="card-header bg-dark text-white ">
-            <div class="btn-group btn-group" role="group" aria-label="...">
+            <div class="btn-group btn-group shadow-card" role="group" aria-label="...">
             '.$paperTypePill.'
             '.$prioritytag.'
             </div>
-            <div class="btn-group " role="group" aria-label="...">
+            <div class="btn-group shadow-card" role="group" aria-label="...">
             <button type="button" class="btn btn-dark border-white ">
             '.$row['department_name']  .'
             </button>
@@ -285,7 +394,7 @@ if ($result->num_rows > 0) {
             Rs:'.$row['amount'].'
             </button>
             </div>
-            <div class="btn-group btn-group" role="group" aria-label="...">
+            <div class="btn-group btn-group shadow-card" role="group" aria-label="...">
             <div class="btn-group btn-group" role="group" aria-label="...">
             '.$editButtonTag.'
             <a class="btn btn-primary" href="'.$url.'">

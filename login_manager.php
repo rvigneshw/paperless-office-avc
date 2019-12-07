@@ -33,7 +33,7 @@
             $_SESSION['error']="";
             $_SESSION['user'] = $myusername;
             $_SESSION['dept'] = $row['department'];
-            header("location: dashboard.php?view=1");
+            header("location: dashboard.php");
         }else{
             $_SESSION['error']="Wrong Credentials";
             header("location: index.php");

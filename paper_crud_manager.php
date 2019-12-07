@@ -1,5 +1,4 @@
 <?php
-
 include_once('db_connection.php');
  if(!isset($_SESSION)) 
     { 
@@ -7,33 +6,43 @@ include_once('db_connection.php');
     } 
     include_once('auth.php');
 if(isset($_GET['approve'])){
-    var_dump($_GET);
+
     $paperId=$_GET['id'];
-    if($_SESSION['dept'] <=3){
+
+    if($_SESSION['dept'] <=4){
+        echo "inside if";
         if($_GET['approve']==1){ //Approve
+            echo "inside if2";
             switch ($_SESSION['dept']) {
                 case 1: //Secretary
-                    $stsOfManager=1; $stsOfPrincipal=0; $stsOfSecretary=2;$isApproved="`isApproved`+1";
+                    $stsOfManager=1;$stsOfDirector=0; $stsOfPrincipal=0; $stsOfSecretary=2;$isApproved="`isApproved`+1";
                     break;
                 case 2: //Principal
-                    $stsOfManager=2; $stsOfPrincipal=2; $stsOfSecretary=1;$isApproved="`isApproved`";
+                    $stsOfManager=2;$stsOfDirector=2; $stsOfPrincipal=2; $stsOfSecretary=1;$isApproved="`isApproved`";
                     break;
-                case 3: //Manager
-                    $stsOfManager=2; $stsOfPrincipal=1; $stsOfSecretary=0;$isApproved="`isApproved`";;
+                case 3: //Director
+                    $stsOfManager=2;$stsOfDirector=2; $stsOfPrincipal=1; $stsOfSecretary=0;$isApproved="`isApproved`";
+                    break;
+                case 4: //Manager
+                    echo "hello";
+                    $stsOfManager=2;$stsOfDirector=1; $stsOfPrincipal=0; $stsOfSecretary=0;$isApproved="`isApproved`";
                     break;
             }
         }elseif($_GET['approve']==2){ //Disapprove
             switch ($_SESSION['dept']) {
                 case 1:  //Secretary
-                    $stsOfManager=3; $stsOfPrincipal=3; $stsOfSecretary=3;
+                    $stsOfManager=3;$stsOfDirector=3; $stsOfPrincipal=3; $stsOfSecretary=3;
                     $isApproved="`isApproved`";
                     // UPDATE `papers` SET `isApproved`=`isApproved`+1 WHERE id=2
                     break;
                 case 2:  //Principal
-                    $stsOfManager=3; $stsOfPrincipal=3; $stsOfSecretary=0;$isApproved="`isApproved`";
+                    $stsOfManager=3;$stsOfDirector=3; $stsOfPrincipal=3; $stsOfSecretary=0;$isApproved="`isApproved`";
                     break;
-                case 3:  //Manager
-                    $stsOfManager=3; $stsOfPrincipal=0; $stsOfSecretary=0;$isApproved="`isApproved`";
+                case 3:  //Director
+                    $stsOfManager=3;$stsOfDirector=3; $stsOfPrincipal=0; $stsOfSecretary=0;$isApproved="`isApproved`";
+                    break;   
+                case 4:  //Manager
+                    $stsOfManager=3;$stsOfDirector=0; $stsOfPrincipal=0; $stsOfSecretary=0;$isApproved="`isApproved`";
                     break;   
             }
         }
@@ -42,11 +51,12 @@ if(isset($_GET['approve'])){
         $sql="UPDATE `papers` SET 
                 `isApproved`=".$isApproved.",
                 `status_of_manager`='".$stsOfManager."',
+                `status_of_director`='".$stsOfDirector."',
                 `status_of_principal`='".$stsOfPrincipal."',
                 `status_of_secretary`='".$stsOfSecretary."',
                 `last_modified_person`='".$user."'
                 WHERE  `id`=".$paperId;
-        
+
         if (query_custom($sql) === TRUE) {
             $check_whether_paper_to_add_to_funds_table="SELECT * FROM `papers` WHERE `isApproved`=2 AND `id`=".$paperId;
             $fund_res=query_custom($check_whether_paper_to_add_to_funds_table);
@@ -68,7 +78,7 @@ if(isset($_GET['approve'])){
             }
             header("location: dashboard.php");
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $sql . "<br>";
         }
 }
 }
@@ -108,9 +118,12 @@ if(isset($_POST['addpaper'])){
         `paper_submitted_person`,
         `amount`,
         `status_of_manager`,
+        `status_of_director`,
         `status_of_principal`,
         `status_of_secretary`,
-        `last_modified_person`) 
+        `last_modified_person`,
+        `returned_for_query`
+        ) 
         VALUES (
              '".$papertype."',
              '".$department."',
@@ -124,7 +137,9 @@ if(isset($_POST['addpaper'])){
              '". 1 ."',
              '". 0 ."',
              '". 0 ."',
-             '".$submittedPerson."'             
+             '". 0 ."',
+             '".$submittedPerson."',
+             '". 0 ."'           
         )
         ";
         // echo $sql;
@@ -132,7 +147,7 @@ if(isset($_POST['addpaper'])){
             
             header("location: dashboard.php");
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $sql . "<br>" ;
         }
 }
 
@@ -169,6 +184,7 @@ if(isset($_POST['editpaper'])){
      `amount`='".$amount."',
      `associated_files_path`='".$associated_files_path."',
      `status_of_manager`=1,
+     `status_of_director`=0,
      `status_of_principal`=0,
      `status_of_secretary`=0,
      `last_modified_person`='".$_SESSION['user']."'
@@ -177,7 +193,7 @@ if(isset($_POST['editpaper'])){
         if (query_custom($sql) === TRUE) {
             header("location: dashboard.php");
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $sql . "<br>";
         }
 }
 
@@ -188,7 +204,7 @@ if(isset($_GET['delete'])){
     if (query_custom($sql) === TRUE) {
         header("location: dashboard.php");
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $sql . "<br>";
     }
 }
 

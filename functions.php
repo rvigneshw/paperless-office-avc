@@ -1,4 +1,5 @@
 <?php
+include_once('db_connection.php');
 function getSmallText($string)
 {
     $string = strip_tags($string);
@@ -144,5 +145,87 @@ function getFilesCount($dir)
 {
     $allFiles = scandir($dir);
     return count($allFiles)-2;
+}
+
+
+function getCountForUser($userid,$condition,$sts,$param2=-1,$cond2=-1,$sts2=-1){
+    switch ($userid) {
+        case 1:
+            if($param2!=-1&&$cond2!=-1&&$sts2!=-1){
+               return secretaryCount($condition,$sts,$param2,$cond2,$sts2);    
+            }else{
+                return secretaryCount($condition,$sts);
+            }
+            break;
+        case 2:
+            if($param2!=-1&&$cond2!=-1&&$sts2!=-1){
+               return principalCount($condition,$sts,$param2,$cond2,$sts2);    
+            }else{
+                return principalCount($condition,$sts);
+            }
+            break;
+        case 3:
+            if($param2!=-1&&$cond2!=-1&&$sts2!=-1){
+               return directorCount($condition,$sts,$param2,$cond2,$sts2);    
+            }else{
+                return directorCount($condition,$sts);
+            }
+            break;
+        case 4:
+            if($param2!=-1&&$cond2!=-1&&$sts2!=-1){
+               return managerCount($condition,$sts,$param2,$cond2,$sts2);    
+            }else{
+                return managerCount($condition,$sts);
+            }
+            break;
+        default:
+            if($param2!=-1&&$cond2!=-1&&$sts2!=-1){
+                return managerCount($condition,$sts,$param2,$cond2,$sts2);    
+            }else{
+                return managerCount($condition,$sts);
+            }
+            break;
+    }
+
+}
+
+function managerCount($condition,$sts,$param2=-1,$cond2=-1,$sts2=-1){
+    if($param2!=-1&&$cond2!=-1&&$sts2!=-1){
+        return getCountForPapers("`status_of_manager`",$condition,$sts,$param2,$cond2,$sts2);    
+    }else{
+        return getCountForPapers("`status_of_manager`",$condition,$sts);
+    }
+}
+function directorCount($condition,$sts,$param2=-1,$cond2=-1,$sts2=-1){
+    if($param2!=-1&&$cond2!=-1&&$sts2!=-1){
+        return getCountForPapers("`status_of_director`",$condition,$sts,$param2,$cond2,$sts2);    
+    }else{
+        return getCountForPapers("`status_of_director`",$condition,$sts);
+    }
+}
+function secretaryCount($condition,$sts,$param2=-1,$cond2=-1,$sts2=-1){
+    if($param2!=-1&&$cond2!=-1&&$sts2!=-1){
+        return getCountForPapers("`status_of_secretary`",$condition,$sts,$param2,$cond2,$sts2);    
+    }else{
+        return getCountForPapers("`status_of_secretary`",$condition,$sts);
+    }
+}
+function principalCount($condition,$sts,$param2=-1,$cond2=-1,$sts2=-1){
+    if($param2!=-1&&$cond2!=-1&&$sts2!=-1){
+        return getCountForPapers("`status_of_principal`",$condition,$sts,$param2,$cond2,$sts2);    
+    }else{
+        return getCountForPapers("`status_of_principal`",$condition,$sts);
+    }
+}
+
+function getCountForPapers($paramter,$condition,$value,$paramter2=-1,$condition2=-1,$value2=-1){
+    $query="SELECT * FROM `papers` WHERE ".$paramter." ".$condition." ".$value;
+    if($paramter2!=-1&&$condition2!=-1&&$value2!=-1){
+        $query=$query." AND ".$paramter2." ".$condition2." ".$value2;
+    }
+    // echo "**".$query;
+    // echo "Count:".get_count_for_query($query)."**</br>";
+
+    return get_count_for_query($query);
 }
 ?>

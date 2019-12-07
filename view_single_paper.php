@@ -53,7 +53,7 @@ if(isset($_GET['id'])){
 ?>
 <body>
 <div>
-        <nav class="navbar navbar-dark bg-dark text-white navbar-expand-md navigation-clean-button">
+        <nav class="navbar navc navbar-dark bg-dark text-white navbar-expand-md navigation-clean-button">
             <div class="container"><a class="navbar-brand" href="#">
                 Paperless Office
 
@@ -71,14 +71,14 @@ if(isset($_GET['id'])){
                     if($result['paper_submitted_person']==$_SESSION['user']){ ?>
                         <li class="nav-item " role="presentation">
                         <a  href="edit_paper_form.php?id=<?php echo  $id; ?>">
-                        <button class="btn btn-warning rounded-0">
+                        <button class="btn btn-warning rounded-pilll">
                             Edit Paper
                         </button>
                         </a>
                         </li>
                         <li class="nav-item " role="presentation">
                         <a  href="paper_crud_manager.php?delete=<?php echo  $id; ?>">
-                        <button class="btn btn-danger rounded-0">
+                        <button class="btn btn-danger rounded-pilll">
                             Delete Paper
                         </button>
                         </a>
@@ -88,14 +88,14 @@ if(isset($_GET['id'])){
                     ?>
                         <li class="nav-item " role="presentation">
                         <a  href="paper_crud_manager.php?approve=1&id=<?php echo  $id; ?>">
-                            <button class="btn btn-success rounded-0">
+                            <button class="btn btn-success rounded-pilll">
                             Approve Paper
                             </button>
                         </a>
                         </li>
                         <li class="nav-item" role="presentation">
                         <a  href="paper_crud_manager.php?approve=2&id=<?php echo  $id; ?>">
-                            <button class="btn btn-danger rounded-0">
+                            <button class="btn btn-danger rounded-pilll">
                             Reject Paper
                             </button>
                         </a>
@@ -104,7 +104,7 @@ if(isset($_GET['id'])){
                         <li class="nav-item" role="presentation">
                             <a 
                             href="dashboard.php">
-                            <button class="btn btn-info rounded-0">
+                            <button class="btn btn-primary rounded-pilll">
                             Go To Dashboard
                             </button>
                             </a>
@@ -129,7 +129,7 @@ if(isset($_GET['id'])){
                     </ul>
                     <span class="navbar-text actions"> 
                         <b class="text-white"><?php echo ucwords($_SESSION['user']); ?></b>
-                    <a class="btn btn-warning " role="button" href="login_manager.php?logout=1">Log Out</a>
+                    <a class="btn btn-warning rounded-pilll" role="button" href="login_manager.php?logout=1">Log Out</a>
                     </span>
                 </div>
             
@@ -138,16 +138,12 @@ if(isset($_GET['id'])){
         </nav>
     
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js">
-    </script>
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-sm-5 col-md-6 col-lg-8 offset-sm-0">
+                <div class="col-sm-5 border-white col-md-6 col-lg-8 offset-sm-0">
 <br>
-                <table class="table  table-dark rounded">
+                <table class="table shadow-card table-dark border-white" style="border-radius:10px;">
                     <tbody>
                         <tr>
                             <td><b> Subject: </b></td>
@@ -168,7 +164,7 @@ if(isset($_GET['id'])){
                         <tr>
                             <td><b> Files:  </b></td>
                             <td >
-                            <button onclick="collapseToggle()" class="btn btn-primary" type="button" >
+                            <button onclick="collapseToggle()" class="btn rounded-pilll btn-primary" type="button" >
                                 <?php echo $showFilesText; ?>
                             </button>
                             <div class="collapse" id="collapseExample">
@@ -182,7 +178,7 @@ if(isset($_GET['id'])){
                 </div>
                 <div class="col-sm-3 col-md-6 col-lg-4">
                 <br>
-                <div class="card bg-dark" style="width: 25rem;">
+                <div class="card shadow-card bg-dark" style="width: 25rem;border-radius:100px; text-align:center;margin:10px;">
                     <form 
                     method="post" action="query_crud_manager.php" 
                     class="form  
@@ -193,13 +189,13 @@ if(isset($_GET['id'])){
                     <h4>Add a new Query</h4>
                     </div>
                     <div class="form-group mx-sm-3 mb-2">
-                    <input required type="text" class="form-control" name="query" placeholder="Query">
+                    <input required type="text" class="form-control rounded-pilll" name="query" placeholder="Query">
                     <input type="hidden" name="addquery" value="1">
                     <input type="hidden" name="paperid" value="<?php
                     echo $id;
                     ?>">
                     </div>
-                    <button type="submit" class="btn btn-primary mb-1 mx-sm-3">
+                    <button type="submit" class="btn rounded-pilll btn-primary mb-1 mx-sm-3">
                     Post Query
                     </button>
                     </form>
@@ -209,23 +205,33 @@ if(isset($_GET['id'])){
                         while($single_comment = $comment_data->fetch_assoc()) {
                             if($single_comment['answer']==""){
                                 $btn_txt="Answer";
+                                $open_toggle_txt=" </br>[Un Answered]";
+                                $open_toggle_button_color=" btn-danger ";
+                                
                             }else{
                                 $btn_txt="Update Answer";
+                                $open_toggle_txt="</br>[Answered]";
+                                $open_toggle_button_color=" btn-success ";
                             }
-if($single_comment['answer']!=""){
+                            if($single_comment['answer']!=""){
 
-    $answerTag='<li class="list-group-item">Answered At : '.date("F j, Y, g:i a",strtotime($single_comment['updated_at'])).'</li>
-    <li class="list-group-item">'.$single_comment['answer'].'</li>';
-}else{
-    $answerTag='<li class="list-group-item">No answers yet</li>';
-}
+                                $answerTag='<li class="list-group-item bg-dark text-white"><b>Answered At :</b> '.date("F j, Y, g:i a",strtotime($single_comment['updated_at'])).'</li>
+                                <li class="list-group-item">'.$single_comment['answer'].'</li>';
+                            }else{
+                                $answerTag='<li class="list-group-item">No answers yet</li>';
+                            }
 echo
-'<div class="card" style="width: 25rem;">
+'
+<button style="width:25rem;" class="btn rounded-pilll mar10'.$open_toggle_button_color.'" type="button" data-toggle="collapse" data-target="#queryid'.$single_comment['id'].'" aria-expanded="false" aria-controls="queryid'.$single_comment['id'].'">
+    <b>Open Query:</b><br>'.$single_comment['query'].$open_toggle_txt.'
+  </button>
+  <div class="collapse " id="queryid'.$single_comment['id'].'">
+<div class="card rounded-pilll bg-dark"  style="width: 25rem;">
   
     <div class="card-body">
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">Created At : '.date("F j, Y, g:i a",strtotime($single_comment['created_at'])).'</li>
-        <li class="list-group-item">'.$single_comment['query'].'</li>
+        <li class="list-group-item bg-dark text-white"><b>Created At :</b> '.date("F j, Y, g:i a",strtotime($single_comment['created_at'])).'</li>
+        <li class="list-group-item " style="broder-radius:100px;">'.$single_comment['query'].'</li>
         '.$answerTag.'
     </ul>
     </div>
@@ -233,16 +239,17 @@ echo
     
         <form method="post" action="query_crud_manager.php" class="form-inline">
             <div class="form-group mx-sm-3 mb-2">
-                <input type="text" required class="form-control" name="response" placeholder="Answer/Response">
+                <input type="text" required class="rounded-pilll form-control" name="response" placeholder="Answer/Response">
             </div>
             <input type="hidden" name="id" value="'.$single_comment['id'].'">
             <input type="hidden" name="addanswer" value="1">
             <input type="hidden" name="paperid" value="'.$id.'">
-            <button type="submit" class="btn btn-primary mb-2">
+            <button type="submit" class="rounded-pilll btn btn-primary mb-2">
             '.$btn_txt.'
             </button>
         </form>
 
+</div>
 </div>
 ';
                         }
@@ -252,9 +259,6 @@ echo
             </div>
         </div>
     </div>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
 <script>
 function collapseToggle() {

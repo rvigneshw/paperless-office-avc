@@ -62,6 +62,7 @@ include_once('db_connection.php');
   }else{
       $end_date=$_GET['end_date'];
   }
+  $returned=NOCONDITION;
 } ?>
 <!DOCTYPE html>
 <html>
@@ -223,11 +224,12 @@ if(isset($_GET['priority'])){
                 $param_department=$department;
                 $param_start_date=$start_date;
                 $param_end_date=$end_date;
+                $param_returned=$returned;
 
                 
                 // echo "dept".$department."priority".$priority."\nisApproved".$isApproved."\npapertype".$papertype."\nsts_of_manager".$sts_of_manager."\nsts_of_principal".$sts_of_principal."\nsts_of_secretary".$sts_of_secretary."\nstart_date".$start_date."\nend_date".$end_date."\n";
 
-                echo display_cards($param_priority,$param_isApproved,$param_paper_type,$param_sts_of_manager,$param_sts_of_principal,$param_sts_of_secretary,$param_department,$param_start_date,$param_end_date);
+                echo display_cards($param_priority,$param_isApproved,$param_paper_type,$param_sts_of_manager,$param_sts_of_principal,$param_sts_of_secretary,$param_department,$param_start_date,$param_end_date,$param_returned);
 
                 // default_view(1,3);
 }
