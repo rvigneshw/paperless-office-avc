@@ -14,7 +14,7 @@ if(isset($_POST['addanswer'])){
     $sql = "UPDATE `queries` SET `answer`='".$response."' WHERE `id`=".$id;
     
     if (query_custom($sql) === TRUE) {
-        $returnPaperForQuery="UPDATE `papers` SET `returned_for_query`=`returned_for_query`-1 WHERE `id`=".$paperid;
+        $returnPaperForQuery="UPDATE `papers` SET `returned_for_query`=`returned_for_query`-1 ,`resubmission_count`=`resubmission_count`+1 WHERE `id`=".$paperid;
         if (query_custom($returnPaperForQuery) === TRUE) {
         $url="view_single_paper.php?id=".$paperid;
         header('Location:'.$url);

@@ -13,9 +13,9 @@ define("NOCONDITION", -1);
 
 function default_view($paper_sts,$dept_code,$cond_dept=NOCONDITION){
     $debug=1;
-    echo $dept_code;
-    echo $paper_sts;
-    echo $cond_dept;
+    // echo $dept_code;
+    // echo $paper_sts;
+    // echo $cond_dept;
     $p_priority=NOCONDITION;
     $p_isApproved=NOCONDITION;
     $p_paper_type=NOCONDITION;
@@ -300,7 +300,7 @@ if($param_paper_type==NOCONDITION){
 
 $sql=$select_query.$department_id_condtion.$isApproved_condtion.$priority_condtion.$status_of_manager_condtion.$status_of_director_condtion.$status_of_principal_condtion.$status_of_secretary_condtion.$updated_at_condtion.$returned_for_query_condtion.$paper_type_condtion;
 
-        echo $sql;
+        // echo $sql;
         // die();
 
 $result = query_custom($sql);
@@ -309,6 +309,7 @@ if ($result->num_rows > 0) {
     echo '<center><div class="card-columns">';
     while($row = $result->fetch_assoc()) {
 
+        $resubmission_count_pill='<button type="button" class="btn btn-warning">'.$row['resubmission_count'].'</button>';
         if ($row['isApproved']==0) {
             $paperTypePill='<button type="button" class="btn btn-primary">
             P
@@ -382,6 +383,7 @@ if ($result->num_rows > 0) {
             <div class="card shadow-card mb-4 border-dark" style="width: 25rem; margin:1rem;">
             <div class="card-header bg-dark text-white ">
             <div class="btn-group btn-group shadow-card" role="group" aria-label="...">
+            '.$resubmission_count_pill.'
             '.$paperTypePill.'
             '.$prioritytag.'
             </div>

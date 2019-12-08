@@ -36,6 +36,7 @@ if(isset($_GET['id'])){
     $content=$result['content'];
     $amount=$result['amount'];
     $associated_files_path=$result['associated_files_path'];
+    $ResubmissionCount=$result['resubmission_count'];
     // var_dump($result);
     $commentsSql="SELECT * FROM `queries` WHERE `paper_id`=".$id;
     $comment_data = query_custom($commentsSql);
@@ -160,6 +161,10 @@ if(isset($_GET['id'])){
                         <tr>
                             <td><b> Amount: </b></td>
                             <td><?php echo $amount; ?></td>
+                        </tr>
+                        <tr>
+                            <td><b> Resubmission Count: </b></td>
+                            <td><?php echo $ResubmissionCount; ?></td>
                         </tr>
                         <tr>
                             <td><b> Files:  </b></td>
