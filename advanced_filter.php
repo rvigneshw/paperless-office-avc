@@ -37,6 +37,11 @@ include_once('db_connection.php');
   }else{
       $sts_of_manager=$_GET['sts_of_manager'];
   }
+  if($_GET['sts_of_director']==-1){
+    $sts_of_director=NOCONDITION;
+  }else{
+        $sts_of_director=$_GET['sts_of_director'];
+  }
   if($_GET['sts_of_principal']==-1){
       $sts_of_principal=NOCONDITION;
   }else{
@@ -163,14 +168,21 @@ include_once('db_connection.php');
         ?>
       </select>
 
-<select class="form-control col-md-4" name="sts_of_manager">
+<select class="form-control col-md-3" name="sts_of_manager">
     <option value="-1" selected>Manager Status --Anything</option>
     <option value="1"> Pending At Manager</option>
     <option value="2"> Approved By Manager</option>
     <option value="3"> Rejected By Manager</option>
 </select>
 
-<select class="form-control col-md-4" name="sts_of_principal">
+<select class="form-control col-md-3" name="sts_of_director">
+    <option value="-1" selected>Director Status --Anything</option>
+    <option value="1"> Pending At Director</option>
+    <option value="2"> Approved By Director</option>
+    <option value="3"> Rejected By Director</option>
+</select>
+
+<select class="form-control col-md-3" name="sts_of_principal">
     <option value="-1" selected>Principal Status --Anything</option>
     <option value="0" >Not Yet Seen By Principal</option>
     <option value="1"> Pending At Principal</option>
@@ -178,7 +190,7 @@ include_once('db_connection.php');
     <option value="3"> Rejected By Principal</option>
 </select>
 
-<select class="form-control col-md-4" name="sts_of_secretary">
+<select class="form-control col-md-3" name="sts_of_secretary">
 <option value="-1" selected>Secretary Status --Anything</option>
     <option value="0" >Not Yet Seen By Secretary</option>
     <option value="1"> Pending At Secretary</option>
@@ -219,6 +231,7 @@ if(isset($_GET['priority'])){
                 $param_isApproved=$isApproved;
                 $param_paper_type=$papertype;
                 $param_sts_of_manager=$sts_of_manager;
+                $param_sts_of_director=$sts_of_director;
                 $param_sts_of_principal=$sts_of_principal;
                 $param_sts_of_secretary=$sts_of_secretary;
                 $param_department=$department;
@@ -229,7 +242,7 @@ if(isset($_GET['priority'])){
                 
                 // echo "dept".$department."priority".$priority."\nisApproved".$isApproved."\npapertype".$papertype."\nsts_of_manager".$sts_of_manager."\nsts_of_principal".$sts_of_principal."\nsts_of_secretary".$sts_of_secretary."\nstart_date".$start_date."\nend_date".$end_date."\n";
 
-                echo display_cards($param_priority,$param_isApproved,$param_paper_type,$param_sts_of_manager,$param_sts_of_principal,$param_sts_of_secretary,$param_department,$param_start_date,$param_end_date,$param_returned);
+                echo display_cards($param_priority,$param_isApproved,$param_paper_type,$param_sts_of_manager,$param_sts_of_director,$param_sts_of_principal,$param_sts_of_secretary,$param_department,$param_start_date,$param_end_date,$param_returned);
 
                 // default_view(1,3);
 }
@@ -242,4 +255,5 @@ if(isset($_GET['priority'])){
 </body>
 
 </html>
+
 
