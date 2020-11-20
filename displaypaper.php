@@ -308,8 +308,8 @@ $result = query_custom($sql);
 if ($result->num_rows > 0) {
     echo '<center><div class="card-columns">';
     while($row = $result->fetch_assoc()) {
-
-        $resubmission_count_pill='<button type="button" class="btn btn-warning">'.$row['resubmission_count']+1.'</button>';
+$resubmission_count=$row['resubmission_count']+1;
+        $resubmission_count_pill='<button type="button" class="btn btn-warning">'.$resubmission_count.'</button>';
         if ($row['isApproved']==0) {
             $paperTypePill='<button type="button" class="btn btn-primary">
             P
