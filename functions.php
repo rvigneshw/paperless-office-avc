@@ -29,6 +29,28 @@ function get_string_for_single_status_code($code)
             $string=" Pending ";
             break;
         case 2:
+            $string=" Forwarded ";
+            break;
+        case 3:
+            $string=" Rejected ";
+            break;
+        case 4:
+            $string=" Rejected ";
+            break;
+    }
+    return  $string;
+
+}
+function get_string_for_single_status_code_for_secretarty($code)
+{
+    switch($code){
+        case 0:
+            $string=" Not Yet Seen ";
+            break;
+        case 1:
+            $string=" Pending ";
+            break;
+        case 2:
             $string=" Approved ";
             break;
         case 3:
@@ -73,7 +95,7 @@ function get_string_for_status_code($param_manager,$param_principal,$param_secre
             $manager_string="Pending At Manager";
             break;
         case 2:
-            $manager_string="Approved By Manager";
+            $manager_string="Forwarded By Manager";
             break;
         case 3:
             $manager_string="Rejected By Manager";
@@ -90,7 +112,7 @@ function get_string_for_status_code($param_manager,$param_principal,$param_secre
             $principal_string="Pending At Principal";
             break;
         case 2:
-            $principal_string="Approved By Principal";
+            $principal_string="Forwarded By Principal";
             break;
         case 3:
             $principal_string="Rejected By Principal";

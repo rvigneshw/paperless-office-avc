@@ -309,7 +309,7 @@ if ($result->num_rows > 0) {
     echo '<center><div class="card-columns">';
     while($row = $result->fetch_assoc()) {
 
-        $resubmission_count_pill='<button type="button" class="btn btn-warning">'.$row['resubmission_count'].'</button>';
+        $resubmission_count_pill='<button type="button" class="btn btn-warning">'.$row['resubmission_count']+1.'</button>';
         if ($row['isApproved']==0) {
             $paperTypePill='<button type="button" class="btn btn-primary">
             P
@@ -347,7 +347,7 @@ if ($result->num_rows > 0) {
         $status_of_manager_stmt=get_string_for_single_status_code($status_of_manager_code);
         $status_of_director_stmt=get_string_for_single_status_code($status_of_director_code);
         $status_of_principal_stmt=get_string_for_single_status_code($status_of_principal_code);
-        $status_of_secretary_stmt=get_string_for_single_status_code($status_of_secretary_code);
+        $status_of_secretary_stmt=get_string_for_single_status_code_for_secretarty($status_of_secretary_code);
 
         $status_of_manager_btn_class=get_class_name_for_code($status_of_manager_code);
         $status_of_director_btn_class=get_class_name_for_code($status_of_director_code);

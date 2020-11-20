@@ -36,7 +36,7 @@ if(isset($_GET['id'])){
     $content=$result['content'];
     $amount=$result['amount'];
     $associated_files_path=$result['associated_files_path'];
-    $ResubmissionCount=$result['resubmission_count'];
+    $ResubmissionCount=$result['resubmission_count']+1;
     // var_dump($result);
     $commentsSql="SELECT * FROM `queries` WHERE `paper_id`=".$id;
     $comment_data = query_custom($commentsSql);
@@ -200,9 +200,20 @@ if(isset($_GET['id'])){
                     echo $id;
                     ?>">
                     </div>
-                    <button type="submit" class="btn rounded-pilll btn-primary mb-1 mx-sm-3">
+                    <?php 
+                    if($_SESSION['dept'] >4){
+                        echo '<button 
+                    type="submit" disabled="true" class="btn rounded-pilll btn-primary mb-1 mx-sm-3">
+                    Not allowed
+                    </button>';
+                    }else{
+                        echo '<button 
+                    type="submit" class="btn rounded-pilll btn-primary mb-1 mx-sm-3">
                     Post Query
-                    </button>
+                    </button>';
+                    }
+                    ?>
+                    
                     </form>
                 </div>
                     <?php
