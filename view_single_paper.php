@@ -41,7 +41,7 @@ if(isset($_GET['id'])){
     $commentsSql="SELECT * FROM `queries` WHERE `paper_id`=".$id;
     $comment_data = query_custom($commentsSql);
     $fileCount=getFilesCount($associated_files_path);
-    if($fileCount==0){
+    if($fileCount<=0){
         $showFilesText="No Files to show";
     }else{
         $showFilesText="Show All ".$fileCount." Files";

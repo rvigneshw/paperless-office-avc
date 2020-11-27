@@ -35,7 +35,7 @@ function get_string_for_single_status_code($code)
             $string=" Rejected ";
             break;
         case 4:
-            $string=" Rejected ";
+            $string=" Returned ";
             break;
     }
     return  $string;
@@ -57,7 +57,7 @@ function get_string_for_single_status_code_for_secretarty($code)
             $string=" Rejected ";
             break;
         case 4:
-            $string=" Rejected ";
+            $string=" Returned ";
             break;
     }
     return  $string;
