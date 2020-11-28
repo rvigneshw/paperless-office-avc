@@ -17,12 +17,12 @@ if($userid>4){
   $approvedPapersCount=getCountForUser($userid,"=",2,"`department_id`","=",$userid);
   $pendingPapersCount=getCountForUser($userid,"=",1,"`returned_for_query`","=0","AND `department_id`=".$userid);
   $rejectedPapersCount=getCountForUser($userid,"=",3,"`department_id`","=",$userid);
-  $returnedPapersCount=getCountForUser($userid,"=",1,"`returned_for_query`",">0","AND `department_id`=".$userid);
+  $returnedPapersCount=getCountForUser($userid,"=",4,"`returned_for_query`",">0","AND `department_id`=".$userid);
 }else{
   $approvedPapersCount=getCountForUser($userid,"=",2);
   $pendingPapersCount=getCountForUser($userid,"=",1,"`returned_for_query`","=",0);
   $rejectedPapersCount=getCountForUser($userid,"=",3);
-  $returnedPapersCount=getCountForUser($userid,"=",1,"`returned_for_query`",">",0);
+  $returnedPapersCount=getCountForUser($userid,"=",4,"`returned_for_query`",">",0);
 }
 $deptCountCSE=getCountForUser($userid,"=",1,"`department_id`","=",11);
 $deptCountCivil=getCountForUser($userid,"=",1,"`department_id`","=",10);

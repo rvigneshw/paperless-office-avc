@@ -53,8 +53,8 @@ function default_view($paper_sts,$dept_code,$cond_dept=NOCONDITION){
                 $p_sts_of_secretary=NOCONDITION;
                 break;
             case 4://For Returned Paper
-                $p_returned_for_query=1;
-                $p_sts_of_manager=NOCONDITION;
+                $p_returned_for_query=NOCONDITION;
+                $p_sts_of_manager=4;
                 $p_sts_of_principal=NOCONDITION;
                 $p_sts_of_director=NOCONDITION;
                 $p_sts_of_secretary=NOCONDITION;
@@ -155,7 +155,7 @@ function default_view($paper_sts,$dept_code,$cond_dept=NOCONDITION){
                 $p_sts_of_secretary=NOCONDITION;
                 break;
             case 4: //For Manager
-                $p_returned_for_query=NOCONDITION;
+                $p_returned_for_query=1;
                 $p_sts_of_manager=3;
                 $p_sts_of_director=NOCONDITION;
                 $p_sts_of_principal=NOCONDITION;
@@ -169,25 +169,25 @@ function default_view($paper_sts,$dept_code,$cond_dept=NOCONDITION){
                 $p_sts_of_manager=NOCONDITION;
                 $p_sts_of_director=NOCONDITION;
                 $p_sts_of_principal=NOCONDITION;
-                $p_sts_of_secretary=1;
+                $p_sts_of_secretary=4;
                 break;
             case 2: //For Principal
                 $p_returned_for_query=1;
                 $p_sts_of_manager=NOCONDITION;
                 $p_sts_of_director=NOCONDITION;
-                $p_sts_of_principal=1;
+                $p_sts_of_principal=4;
                 $p_sts_of_secretary=NOCONDITION;
                 break;
             case 3: //For Manager
                 $p_returned_for_query=1;
                 $p_sts_of_manager=NOCONDITION;
-                $p_sts_of_director=1;
+                $p_sts_of_director=4;
                 $p_sts_of_principal=NOCONDITION;
                 $p_sts_of_secretary=NOCONDITION;
                 break;
             case 4: //For Manager
                 $p_returned_for_query=1;
-                $p_sts_of_manager=1;
+                $p_sts_of_manager=4;
                 $p_sts_of_director=NOCONDITION;
                 $p_sts_of_principal=NOCONDITION;
                 $p_sts_of_secretary=NOCONDITION;
